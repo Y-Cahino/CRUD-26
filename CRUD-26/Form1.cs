@@ -101,7 +101,7 @@ namespace CRUD_26
             }
         }
         //funzioni per la ricerca
-        int search(Prodotto[] p, string nome)
+        int research(Prodotto[] p, string nome)
         {
             int pos;
             for (int i = 0; i < d; i++)
@@ -119,15 +119,32 @@ namespace CRUD_26
         //funzioni per la modifica
 
         //funzioni per la cancellazione
-        void cancel(Prodotto p)
+        void delete(string nome)
         {
-            using (StreamReader st = File.OpenText(file))
+            if(File.Exists(file))
             {
-                
-                while ((p.nome= st.ReadLine()) != null)
+                using (StreamReader st = File.OpenText(file))
                 {
-                    
-                }
+                    for (int i = 0; i < d; i++)
+                    {
+
+                        while ((p[i].nome = st.ReadLine()) != null)
+                        {
+                            if (p[i].nome == nome)
+                            {
+                                for (int j = i; j < p.Length - 1; j++)
+                                {
+                                    p[i] = p[i + 1];
+                                }
+                                d--;
+                            }
+                        }
+                    }
+                }  
+            }
+            else
+            {
+                MessageBox.Show("Il file non è presente");
             }
         }
         #endregion
