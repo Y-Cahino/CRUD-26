@@ -53,6 +53,7 @@ namespace CRUD_26
             p[d].prezzo = float.Parse(textBox2.Text);
             d++;
             vis();
+            Crea();
             
         }
 
@@ -100,6 +101,22 @@ namespace CRUD_26
                 listView1.Items.Add(proString(p[i]));
             }
         }
+        //funzione per salvare inserimenti su file
+        void Crea()
+        {
+            if (File.Exists(file))
+            {
+                using (StreamWriter sw = new StreamWriter(file, append: false))
+                {
+
+                    for (int i = 0; i < d; i++)
+                    {
+                        sw.WriteLine(file + p[i].nome + p[i].prezzo);
+                    }
+                    sw.Close();
+                }
+            }
+}
         //funzioni per la ricerca
         int research(Prodotto[] p, string nome)
         {
@@ -117,6 +134,10 @@ namespace CRUD_26
 
         }
         //funzioni per la modifica
+        void mod()
+        {
+
+        }
 
         //funzioni per la cancellazione
         void delete(string nome)
